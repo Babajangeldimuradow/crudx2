@@ -25,6 +25,7 @@
                             <ul class="dropdown-menu dropdown-menu-end">
                                 <li><a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['lang' => 'en']) }}">English</a></li>
                                 <li><a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['lang' => 'tk']) }}">Türkmençe</a></li>
+                                <li><a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['lang' => 'ru']) }}">Русский</a></li>
                             </ul>
                         </div>
                     </div>

@@ -10,8 +10,17 @@ class SetLocale
 {
     public function handle($request, Closure $next)
     {
-        // URL-de 'lang' parameter bar bolsa al, yok bolsa sessiýadan al, ýok bolsa default
-        $locale = $request->get('lang') ?? Session::get('locale', config('app.locale'));
+        // Rugsat berlen diller
+        $availableLocales = ['en', 'tk', 'ru'];
+
+        // URL-den 'lang' parameterini al
+        $locale = $request->get('lang');
+
+        // Eger 'lang' parameteri bar we rugsat berlen dillerde bolsa, ulanylýar
+        if (!in_array($locale, $availableLocales)) {
+            // Bolmasa sessiýadaky ýa-da konfigurasiýadaky dil ulanylýar
+            $locale = Session::get('locale', config('app.locale'));
+        }
 
         // Dil saýlanylan dil bolýar
         App::setLocale($locale);
