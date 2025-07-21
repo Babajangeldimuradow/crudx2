@@ -79,16 +79,43 @@ public function show(Request $request)
 {
     $query = Car::query();
 
+    // 🔍 Gözleg bölümi
     if ($request->has('search') && !empty($request->search)) {
         $search = $request->search;
         $query->where('make', 'like', "%$search%")
               ->orWhere('model', 'like', "%$search%");
     }
 
-    $cars = $query->paginate(5); 
+    // ✅ Tertipleme (sort) bölümi
+    $sort = $request->get('sort', 'make_asc'); // Default sort
 
-    return view('index', compact('cars'));
+    switch ($sort) {
+        case 'make_desc':
+            $query->orderBy('make', 'desc');
+            break;
+        case 'model_asc':
+            $query->orderBy('model', 'asc');
+            break;
+        case 'model_desc':
+            $query->orderBy('model', 'desc');
+            break;
+        case 'produced_on_asc':
+            $query->orderBy('produced_on', 'asc');
+            break;
+        case 'produced_on_desc':
+            $query->orderBy('produced_on', 'desc');
+            break;
+        default:
+            $query->orderBy('make', 'asc'); // make_asc
+    }
+
+    // 📄 Paginasiýa bilen çykarmak
+    $cars = $query->paginate(5);
+
+    // Sort parametrini hem ugrat
+    return view('index', compact('cars', 'sort'));
 }
+    
 
 
 

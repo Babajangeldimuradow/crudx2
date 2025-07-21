@@ -55,6 +55,17 @@
             <input type="text" name="search" class="form-control" placeholder="Gözleg üçin..." value="{{ request('search') }}">
             <button type="submit" class="btn btn-primary">Gözle</button>
         </div>
+        <div class="input-group">
+        <label class="input-group-text" for="sort">Tertiple</label>
+        <select name="sort" id="sort" class="form-select" onchange="this.form.submit()">
+            <option value="make_asc" {{ request('sort') == 'make_asc' ? 'selected' : '' }}>Make (A-Z)</option>
+            <option value="make_desc" {{ request('sort') == 'make_desc' ? 'selected' : '' }}>Make (Z-A)</option>
+            <option value="model_asc" {{ request('sort') == 'model_asc' ? 'selected' : '' }}>Model (A-Z)</option>
+            <option value="model_desc" {{ request('sort') == 'model_desc' ? 'selected' : '' }}>Model (Z-A)</option>
+            <option value="produced_on_asc" {{ request('sort') == 'produced_on_asc' ? 'selected' : '' }}>Produced (Oldest)</option>
+            <option value="produced_on_desc" {{ request('sort') == 'produced_on_desc' ? 'selected' : '' }}>Produced (Newest)</option>
+        </select>
+    </div>
     </form>
 
                 <table class="table table-striped">
