@@ -127,6 +127,10 @@ public function show(Request $request)
     $pdf = Pdf::loadView('cars_pdf', compact('cars'));
     return $pdf->download('cars.pdf');
 }
+ public function exportExcel()
+    {
+        return Excel::download(new CarExport, 'cars.xlsx');
+    }
 }
 
 
