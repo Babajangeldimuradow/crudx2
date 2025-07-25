@@ -3,7 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Car; // Modeliň import edilmegi möhümdir
+use App\Models\Car; 
+use App\Exports\CarExport; 
+use App\Models\Product;
+use Barryvdh\DomPDF\Facade\Pdf; // PDF üçin
+use Maatwebsite\Excel\Facades\Excel; // Excel üçin 
+use Illuminate\Support\Facades\Storage; // Suraty saklamak üçin
 
 class CarController extends Controller
 {
@@ -116,7 +121,13 @@ public function show(Request $request)
     return view('index', compact('cars', 'sort'));
 }
     
-
-
-
+ public function exportPDF()
+{
+    $cars = Car::all();
+    $pdf = Pdf::loadView('cars_pdf', compact('cars'));
+    return $pdf->download('cars.pdf');
 }
+}
+
+
+

@@ -70,6 +70,16 @@
             <!-- Maglumatlar sanawy we gözleg -->
             <div class="col-md-6">
                 <h2>{{ __('messages.car_list') }}</h2>
+                <!-- Export düwmeleri -->
+<div class="mb-3 d-flex gap-2">
+    <a href="{{ route('cars.export.pdf') }}" class="btn btn-outline-danger">
+        📄 {{ __('messages.export_pdf') ?? 'Export PDF' }}
+    </a>
+    <a href="{{ route('cars.export.excel') }}" class="btn btn-outline-success">
+        📊 {{ __('messages.export_excel') ?? 'Export Excel' }}
+    </a>
+</div>
+
                 <form action="{{ route('cars.show') }}" method="GET" class="mb-3">
                     <div class="input-group mb-2">
                         <input type="text" name="search" class="form-control" placeholder="{{ __('messages.search') }}..." value="{{ request('search') }}">
