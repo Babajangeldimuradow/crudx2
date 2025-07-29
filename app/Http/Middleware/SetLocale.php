@@ -12,7 +12,7 @@ class SetLocale
 {
     public function handle($request, Closure $next)
     {
-        $availableLocales = ['en', 'tk', 'ru', 'tr'];
+        $availableLocales = ['en', 'tk', 'ru', 'tr','zh'];
 
         // URL-den lang parametri al
         $locale = $request->get('lang');
