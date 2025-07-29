@@ -27,6 +27,7 @@
                                 <li><a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['lang' => 'en']) }}">English</a></li>
                                 <li><a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['lang' => 'tk']) }}">Türkmençe</a></li>
                                 <li><a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['lang' => 'ru']) }}">Русский</a></li>
+                                 <li><a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['lang' => 'tr']) }}">Turkce</a></li>
                             </ul>
                         </div>
                     </div>

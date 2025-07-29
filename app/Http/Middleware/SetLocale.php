@@ -1,32 +1,39 @@
 <?php
 
+
 namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Log; // <--- log ulanmak üçin gerekli
 
 class SetLocale
 {
     public function handle($request, Closure $next)
     {
-        // Rugsat berlen diller
-        $availableLocales = ['en', 'tk', 'ru'];
+        $availableLocales = ['en', 'tk', 'ru', 'tr'];
 
-        // URL-den 'lang' parameterini al
+        // URL-den lang parametri al
         $locale = $request->get('lang');
 
-        // Eger 'lang' parameteri bar we rugsat berlen dillerde bolsa, ulanylýar
+        // Debug: gelen URL-den lang barlaýarys
+        Log::info('Lang from URL: ' . $locale);
+
+        // Eger gelen dil rugsat berlenlerde ýok bolsa, sessiýadan ýa-da config-dan al
         if (!in_array($locale, $availableLocales)) {
-            // Bolmasa sessiýadaky ýa-da konfigurasiýadaky dil ulanylýar
             $locale = Session::get('locale', config('app.locale'));
+            Log::info('Lang used from session/config: ' . $locale);
         }
 
-        // Dil saýlanylan dil bolýar
+        // Laravel dilini belläýäris
         App::setLocale($locale);
 
-        // Sessiyada ýatda sakla
+        // Sessiyada saklaýarys
         Session::put('locale', $locale);
+
+        // Debug: ahyrky ulanyljak dil
+        Log::info('Locale set to: ' . $locale);
 
         return $next($request);
     }
